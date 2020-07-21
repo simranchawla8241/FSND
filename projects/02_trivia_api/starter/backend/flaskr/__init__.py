@@ -174,7 +174,7 @@ def create_app(test_config=None):
   category to be shown. 
   '''
 
-  @app.route("/questions/<int:category_id>")
+  @app.route("/questionsCategory/<int:category_id>")
   def get_questions_byCategory(category_id):
     questions=Question.query.filter(Question.category == category_id).all()
     formatted_question=[question.format() for question in questions]
