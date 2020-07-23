@@ -42,7 +42,7 @@ class TriviaTestCase(unittest.TestCase):
     """
 
     def get_paginated_questions(self):
-        res=self.client.get('/questions')
+        res=self.client().get('/questions')
         data=json.loads(res.data)
 
         self.assertEquals(res.status_code,200)
@@ -51,7 +51,7 @@ class TriviaTestCase(unittest.TestCase):
         self.assertTrue(len(data['questions']))
 
     def test_404_request_beyond_valida_page(self):
-        res=self.client.get('/questions?page=1000',json={'rating':1})
+        res=self.client().get('/questions?page=1000',json={'rating':1})
         data=json.loads(res.data)
 
         self.assertEquals(res.status_code,404)
@@ -59,7 +59,7 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEquals(data['message'],'resource not found')
     
     def test_delete_book(self):
-        res=self.client.delete('/questions/1')
+        res=self.client().delete('/questions/1')
         data=json.loads(res.data)
         self.assertEquals(res.status_code,200)
         self.assertEquals(data['success'],True)
@@ -68,7 +68,7 @@ class TriviaTestCase(unittest.TestCase):
         self.assertTrue(len(data['questions']))
     
     def test_422_if_question_does_not_exist(self):
-        res=self.client.delete('/questions/1000')
+        res=self.client().delete('/questions/1000')
         data=json.loads(res.data)
 
         self.assertEquals(res.status_code,422)
@@ -77,7 +77,7 @@ class TriviaTestCase(unittest.TestCase):
 
 
     def create_new_question(self):
-        res=self.client.post('/questions',json=self.new_question)
+        res=self.client().post('/questions',json=self.new_question)
         data=json.loads(res.data)
 
         self.assertEquals(res.status_code,200)
@@ -86,7 +86,7 @@ class TriviaTestCase(unittest.TestCase):
         self.assertTrue(len(data['questions']))
 
     def test_405_if_question_create_not_allowed(self):
-        res=self.client.post('/questions/45',json=self.new_question)
+        res=self.client().post('/questions/45',json=self.new_question)
         data=json.loads(res.data)
 
         self.assertEquals(res.status_code,405)
