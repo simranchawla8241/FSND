@@ -82,32 +82,22 @@ GET '/categories'
 - Returns: An object with a single key, categories, that contains a object of id: category_string key:value pairs. 
 Sample response:
 {
-  "categories": [
-    {
-      "id": 1,
-      "type": "Science"
-    },
-    {
-      "id": 2,
-      "type": "Art"
-    },
-    {
-      "id": 3,
-      "type": "Geography"
-    },
-    {
-      "id": 4,
-      "type": "History"
-    },
-    {
-      "id": 5,
-      "type": "Entertainment"
-    },
-    {
-      "id": 6,
-      "type": "Sports"
-    }
-  ],
+  
+    "categories": {
+
+        "1": "Science",
+
+        "2": "Art",
+
+        "3": "Geography",
+
+        "4": "History",
+
+        "5": "Entertainment",
+
+        "6": "Sports"
+
+        }
   "success": true
 }
 

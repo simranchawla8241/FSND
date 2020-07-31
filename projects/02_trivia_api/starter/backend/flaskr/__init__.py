@@ -46,10 +46,11 @@ def create_app(test_config=None):
   @app.route("/categories")
   def get_categories():
     categories=Category.query.all()
-    formatted_category=[category.format() for category in categories]
+    formatted_category=[category.id:category.type for category in categories]
     return jsonify({
       'success':True,
-      'categories':formatted_category
+      'categories':formatted_category,
+      
     })
 
   '''
@@ -79,6 +80,7 @@ def create_app(test_config=None):
       'success':True,
       'questions':current_questions,
       'total_questions': len(Question.query.all())
+      
     })
 
   '''
@@ -194,34 +196,6 @@ def create_app(test_config=None):
   one question at a time is displayed, the user is allowed to answer
   and shown whether they were correct or not.
   '''
-  # @app.route("/questions/<int:question_id>/category/<int:category_id>",methods=['POST','GET'])
-  # def verify_answer(question_id,category_id):
-  #   body=request.get_json()
-  #   new_answer_entered=body.get('answer',None)
-
-  #   try:
-  #     questions=Question.query.filter(Question.id == question_id).one_or_none()
-  #     if questions is None:
-  #       abort(404)
-  #     else:
-  #       cat=questions.category
-  #       questions_different=Question.query.filter(Question.category == cat).all()
-  #       formatted_question=[question.format() for question in questions_different]
-
-  #     if(questions_different.answer==new_answer_entered):
-  #       return jsonify({
-  #       'success':True,
-  #       'Correct':True,
-  #       'questions':formatted_question
-  #       })
-  #     else:
-  #       return jsonify({
-  #       'success':True,
-  #       'Correct':False,
-  #       'questions':questions.format()
-  #       })
-  #   except:
-  #     abort(404)
 
   @app.route('/quizzes', methods=['POST'])
   def play_random_quiz():
