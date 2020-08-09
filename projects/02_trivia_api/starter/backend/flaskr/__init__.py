@@ -45,13 +45,24 @@ def create_app(test_config=None):
   '''
   @app.route("/categories")
   def get_categories():
-    categories=Category.query.all()
-    formatted_category=[category.id:category.type for category in categories]
-    return jsonify({
+    category = Category.query.order_by(Category.id).all()
+    format_category = [eachcategory.format() for eachcategory in category]
+    result = {
       'success':True,
-      'categories':formatted_category,
+      'categories':format_category
+    }
+    return result
+
+
+
+  # def get_categories():
+  #   categories=Category.query.all()
+  #   formatted_category=[category.format() for category in categories]
+  #   return jsonify({
+  #     'success':True,
+  #     'categories':formatted_category,
       
-    })
+  #   })
 
   '''
   @TODO: 
@@ -196,6 +207,7 @@ def create_app(test_config=None):
   one question at a time is displayed, the user is allowed to answer
   and shown whether they were correct or not.
   '''
+  
 
   @app.route('/quizzes', methods=['POST'])
   def play_random_quiz():
